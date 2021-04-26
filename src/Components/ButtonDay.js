@@ -20,21 +20,23 @@ const StyledButton = withStyles({
 })(Button);
 
 export default function ButtonDay(props) {
-  const { text, selectDays, selected } = props;
+  const { text, selectDays, selected, dayId } = props;
   const [flag, setFlag] = React.useState(selected);
 
   const handleClick = (e) => {
     setFlag(!flag);
     selectDays(e);
   };
-
+  // if (dataId)
   return (
     <StyledButton
       onClick={handleClick}
       variant="contained"
       style={{ backgroundColor: flag ? "red" : "blue" }}
+      data-id={dayId}
     >
       {text}
     </StyledButton>
   );
+  // else return null;
 }

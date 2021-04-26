@@ -20,7 +20,8 @@ export default function SchedulerContainer() {
   const [timeContainerList, setTimeContainerList] = useState([1]);
 
   const addTimeContainer = () => {
-    setTimeContainerList([...timeContainerList, 1]);
+    const newTimeContainerList = [...timeContainerList, 1]
+    setTimeContainerList(newTimeContainerList);
   };
 
   return (

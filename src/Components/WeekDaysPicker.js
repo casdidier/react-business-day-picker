@@ -55,8 +55,8 @@ export default WeekDaysPicker = (props) => {
           return (
             <div className="day" key={v4()}>
               <ButtonDay
+                dayId={day.id}
                 text={day.day}
-                dayNum={day.key}
                 selectDays={selectDays}
               ></ButtonDay>
             </div>
