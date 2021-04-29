@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
-    padding: "5px"
+    padding: "5px",
   },
   days: {
     color: "white",
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    padding: "5px"
+    padding: "5px",
   },
   timerange: {
     color: "white",
@@ -31,14 +31,14 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    padding: "5px"
+    padding: "5px",
   },
   button: {
-    marginTop: "auto"
-  }
+    marginTop: "auto",
+  },
 });
 
-export default WeekDaysPicker = (props) => {
+const WeekDaysPicker = (props) => {
   const { selectDays, weekdays } = props;
   const [timeRangeList, setTimeRangeList] = useState([1]);
 
@@ -79,3 +79,5 @@ export default WeekDaysPicker = (props) => {
     </section>
   );
 };
+
+export default WeekDaysPicker;
