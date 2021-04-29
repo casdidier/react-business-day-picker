@@ -48,12 +48,14 @@ const WeekDaysPicker = (props) => {
     setTimeRangeList([...timeRangeList, 1]);
   };
 
+  console.log("weekdays", weekdays);
+
   return (
     <section className={classes.container}>
       <div className={classes.days}>
         {weekdays.map((day) => {
           return (
-            <div className="day" key={v4()}>
+            <div className="day">
               <ButtonDay
                 dayId={day.id}
                 text={day.day}
@@ -64,10 +66,6 @@ const WeekDaysPicker = (props) => {
         })}
       </div>
       <div className={classes.timerange}>
-        {/* <TimePicker />
-        <TimePicker />
-        <TimePicker />
-        <TimePicker /> */}
         {timeRangeList.length > 0 &&
           timeRangeList.map((e) => {
             return <TimePicker />;

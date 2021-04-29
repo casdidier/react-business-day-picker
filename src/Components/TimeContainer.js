@@ -10,36 +10,33 @@ const WEEKDAYS = [
   { id: 4, day: "J", selected: false },
   { id: 5, day: "V", selected: false },
   { id: 6, day: "S", selected: false },
-  { id: 7, day: "D", selected: false }
+  { id: 7, day: "D", selected: false },
 ];
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
-  }
+    flexWrap: "wrap",
+  },
 }));
 
 export default function TimeContainer() {
   const classes = useStyles();
 
-  const [days, setDays] = useState([]);
   const [hours, setHours] = useState([]);
   const [weekdays, setWeekDays] = useState(WEEKDAYS);
 
   const selectDays = (e) => {
-    // console.log(days);
-    // const dayId = e.target.getAttribute("data-key");
-    // const dayKey = e.target.attributes.getNamedItem("data-id").value;;
     const dayId = e.currentTarget.dataset.id;
     console.log(dayId);
-    const newDays = [...days];
-    newDays.push(e.target.innerHTML);
-    // console.log(newDays);
-    // console.log(days);
+    const selectedDays = [...weekdays].map((day) =>
+      day.id === +dayId ? { ...day, selected: true } : day
+    );
 
-    // setDays(newDays);
+    console.log(selectedDays);
+
+    setWeekDays(selectedDays);
   };
 
   return (
