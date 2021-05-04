@@ -43,7 +43,6 @@ export default function TimePicker(props) {
     <form className={classes.container} noValidate>
       <TextField
         ref={startRef}
-        id="start-time"
         label="à partir de"
         type="time"
         defaultValue="07:30"
@@ -58,7 +57,6 @@ export default function TimePicker(props) {
       />
       <TextField
         inputRef={endRef}
-        id="end-time"
         label="jusqu'à"
         type="time"
         defaultValue="08:00"
