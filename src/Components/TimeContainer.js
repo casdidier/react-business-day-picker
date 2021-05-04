@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { nanoid } from "nanoid";
 import ButtonDay from "./ButtonDay";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 import TimePicker from "./TimePicker";
 
 const WEEKDAYS = [
@@ -59,6 +61,7 @@ export default function TimeContainer(props) {
     updateTimeFrames,
     availableDays,
     indexTimeContainer,
+    deleteTimeContainer,
   } = props;
 
   const [hours, setHours] = useState([]);
@@ -112,6 +115,11 @@ export default function TimeContainer(props) {
 
   return (
     <div className={classes.section}>
+      <IconButton aria-label="delete" className={classes.deleteButton}>
+        <DeleteIcon
+          onClick={(e) => deleteTimeContainer(e, indexTimeContainer)}
+        />
+      </IconButton>
       {weekdays && (
         <section className={classes.container}>
           <div className={classes.days}>

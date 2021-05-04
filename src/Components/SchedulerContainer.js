@@ -9,8 +9,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     flexWrap: "wrap",
   },
+  timeContainer: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
   button: {
     marginRight: "auto",
+  },
+  buttonDelete: {
+    // marginRight: "auto",
   },
 }));
 
@@ -61,8 +69,28 @@ export default function SchedulerContainer() {
     console.log("list of timeFrames", timeFrames);
   };
 
+  const deleteTimeContainer = (e, index) => {
+    const newTimeFramesList = [...timeFrames].filter(
+      (currentTimeFrame, ind) => {
+        return index !== ind;
+      }
+    );
+
+    const newTimeContainerList = [...timeContainerList].filter(
+      (currentTimeFrame, ind) => {
+        return index !== ind;
+      }
+    );
+
+    console.log("newTimeFramesList", newTimeFramesList);
+
+    setTimesFrames(newTimeFramesList);
+    setTimeContainerList(newTimeContainerList);
+  };
+
   useEffect(() => {
     console.log("freshed", timeFrames);
+    // call to API
   }, [timeFrames]);
 
   return (
@@ -70,12 +98,15 @@ export default function SchedulerContainer() {
       {timeContainerList.length > 0 &&
         timeContainerList.map((days, index) => {
           return (
-            <TimeContainer
-              updateWeekDays={updateWeekDays}
-              updateTimeFrames={updateTimeFrames}
-              availableDays={days}
-              indexTimeContainer={index}
-            />
+            <div className={classes.timeContainer}>
+              <TimeContainer
+                updateWeekDays={updateWeekDays}
+                updateTimeFrames={updateTimeFrames}
+                availableDays={days}
+                indexTimeContainer={index}
+                deleteTimeContainer={deleteTimeContainer}
+              />
+            </div>
           );
         })}
       <Button
