@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TimeContainer from "./TimeContainer";
 import Button from "@material-ui/core/Button";
@@ -7,28 +7,76 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   button: {
-    marginRight: "auto"
-  }
+    marginRight: "auto",
+  },
 }));
+
+const WEEKDAYS = [
+  { id: 1, day: "L", selected: false },
+  { id: 2, day: "M", selected: false },
+  { id: 3, day: "M", selected: false },
+  { id: 4, day: "J", selected: true },
+  { id: 5, day: "V", selected: false },
+  { id: 6, day: "S", selected: false },
+  { id: 7, day: "D", selected: false },
+];
 
 export default function SchedulerContainer() {
   const classes = useStyles();
 
-  const [timeContainerList, setTimeContainerList] = useState([1]);
+  const [timeContainerList, setTimeContainerList] = useState([WEEKDAYS]);
+  const [availableDays, setAvailableDays] = useState(WEEKDAYS);
+  const [timeFrames, setTimesFrames] = useState([]);
 
   const addTimeContainer = () => {
-    const newTimeContainerList = [...timeContainerList, 1]
+    const newTimeContainerList = [...timeContainerList, availableDays];
     setTimeContainerList(newTimeContainerList);
   };
+
+  const updateWeekDays = (daysList) => {
+    // console.log("updated weekdays", daysSelected);
+    setAvailableDays(daysList);
+  };
+
+  const updateTimeFrames = (timeFrame, index) => {
+    // console.log("timeframes", timeFrames);
+
+    console.log("follow up timeFrames", index, timeFrames.length);
+
+    if (index + 1 > timeFrames.length) {
+      setTimesFrames([...timeFrames, timeFrame]);
+      console.log("new timeframe added");
+    } else {
+      const newTimeFramesList = [...timeFrames].map((currentTimeFrame, ind) => {
+        return index == ind ? timeFrame : currentTimeFrame;
+      });
+
+      setTimesFrames(newTimeFramesList);
+      console.log("old timeframe updated");
+    }
+
+    console.log("list of timeFrames", timeFrames);
+  };
+
+  useEffect(() => {
+    console.log("freshed", timeFrames);
+  }, [timeFrames]);
 
   return (
     <div className={classes.container}>
       {timeContainerList.length > 0 &&
-        timeContainerList.map((e) => {
-          return <TimeContainer />;
+        timeContainerList.map((days, index) => {
+          return (
+            <TimeContainer
+              updateWeekDays={updateWeekDays}
+              updateTimeFrames={updateTimeFrames}
+              availableDays={days}
+              indexTimeContainer={index}
+            />
+          );
         })}
       <Button
         className={classes.button}
